@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.robertomassoni.xyinc.api;
 
 import br.com.robertomassoni.xyinc.dto.ProductDto;
@@ -42,9 +37,12 @@ public class ProductRest {
     }
 
     @GetMapping("/{id}")
-    public ProductDto get(@PathVariable("id") Integer id) {
-        Product product = productRepository.findById(id).get();                
-        return new ProductDto(product);
+    public ResponseEntity<ProductDto> get(@PathVariable("id") Integer id) {
+        Optional<Product> product = productRepository.findById(id);                
+        if (product.isPresent()) {
+            return ResponseEntity.ok(new ProductDto(product.get()));
+        }
+        return ResponseEntity.notFound().build();        
     }
 
     @PostMapping()
@@ -64,7 +62,6 @@ public class ProductRest {
         }
         return ResponseEntity.notFound().build();
     }
-//    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
