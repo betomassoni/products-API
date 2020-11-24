@@ -7,10 +7,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Lista de Produtos</h1>
-        
-        <c:forEach items="${productList}" var="item">
-            <h2>${item.name} - ${item.category}</h2>
-        </c:forEach>
+        <h1>Produto</h1>
+
+        <h2>${product.name} - ${product.category}</h2>
     </body>
 </html>
