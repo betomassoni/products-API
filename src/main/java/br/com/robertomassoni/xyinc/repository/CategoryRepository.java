@@ -6,7 +6,6 @@
 package br.com.robertomassoni.xyinc.repository;
 
 import br.com.robertomassoni.xyinc.model.Category;
-import br.com.robertomassoni.xyinc.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

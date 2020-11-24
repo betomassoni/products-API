@@ -12,20 +12,20 @@ import br.com.robertomassoni.xyinc.repository.CategoryRepository;
 import br.com.robertomassoni.xyinc.repository.ProductRepository;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductRest {
 
     @Autowired
@@ -59,8 +59,13 @@ public class ProductRest {
 //        return "";
 //    }
 //    
-//    @DeleteMapping("/{id}")
-//    public String delete(@PathVariable("id") Integer id) {
-//        return "";
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        Optional<Product> optional = productRepository.findById(id);
+        if (optional.isPresent()) {
+            productRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
