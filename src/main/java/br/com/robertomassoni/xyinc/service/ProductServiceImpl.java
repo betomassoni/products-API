@@ -12,6 +12,8 @@ import br.com.robertomassoni.xyinc.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,9 +26,13 @@ public class ProductServiceImpl implements ProductService {
     private CategoryService categoryService;
 
     @Override
-    public List<ProductDto> getAllProducts() {
-        List<Product> productList = productRepository.findAll();
-        return ProductMapper.toProductDto(productList);
+    public Page<ProductDto> getAllProducts(Pageable pageable) {
+        Page<Product> pageProduct = productRepository.findAll(pageable);  
+        if (!pageProduct.isEmpty()) {
+            List<ProductDto> productDtoList = ProductMapper.toProductDto(pageProduct.getContent());
+            return ProductMapper.toPageProductDto(productDtoList, pageable, pageProduct);
+        }
+        throw XyincException.throwException(EntityType.PRODUCT, ExceptionType.ENTITY_NOT_FOUND, null);
     }
 
     @Override

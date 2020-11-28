@@ -5,6 +5,9 @@ import br.com.robertomassoni.xyinc.dto.model.ProductDto;
 import br.com.robertomassoni.xyinc.model.Product;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 public class ProductMapper {
 
@@ -39,5 +42,11 @@ public class ProductMapper {
             productDto.setCategory(productRequest.getCategory());
         }
         return productDto;
+    } 
+
+    public static Page<ProductDto> toPageProductDto(List<ProductDto> productDtoList, Pageable pageable, Page<Product> pageProduct) {        
+        return new PageImpl<>(productDtoList, pageable, pageProduct.getTotalElements());
     }
+
+
 }

@@ -10,8 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Response<T> {
     
     private StatusType status;
-    private T payload;
+    private T content;
     private Object errors;
+    private Object pageable;
     
     public StatusType getStatus() {
         return status;
@@ -21,12 +22,12 @@ public class Response<T> {
         this.status = status;
     }
   
-    public T getPayload() {
-        return payload;
+    public T getContent() {
+        return content;
     }
         
-    public Response<T> setPayload(T payload) {
-        this.payload = payload;
+    public Response<T> setContent(T content) {
+        this.content = content;
         return this;
     }
 
@@ -38,7 +39,16 @@ public class Response<T> {
         this.errors = errors;
         return this;
     }
-     
+
+    public Object getPageable() {
+        return pageable;
+    }
+
+    public Response<T> setPageable(Object pageable) {
+        this.pageable = pageable;
+        return this;
+    }
+
     
     public static <T> Response<T> badRequest() {
         Response<T> response = new Response<>();

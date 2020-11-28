@@ -1,15 +1,16 @@
 package br.com.robertomassoni.xyinc.controller.api;
 
 import br.com.robertomassoni.xyinc.controller.request.ProductRequest;
+import br.com.robertomassoni.xyinc.dto.mapper.PageableMapper;
 import br.com.robertomassoni.xyinc.dto.mapper.ProductMapper;
+import br.com.robertomassoni.xyinc.dto.model.ProductDto;
 import br.com.robertomassoni.xyinc.dto.response.Response;
-import br.com.robertomassoni.xyinc.model.Product;
 import br.com.robertomassoni.xyinc.repository.CategoryRepository;
 import br.com.robertomassoni.xyinc.repository.ProductRepository;
 import br.com.robertomassoni.xyinc.service.ProductService;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,27 +34,28 @@ public class ProductController {
     CategoryRepository categoryRepository;
 
     @GetMapping()
-    public Response getAll() {
-        return Response.ok().setPayload(productService.getAllProducts());
+    public Response getAll(Pageable pageable) {
+        Page<ProductDto> pageProductDto = productService.getAllProducts(pageable);               
+        return Response.ok().setContent(pageProductDto.getContent()).setPageable(PageableMapper.toPageableDto(pageProductDto));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value="/{id}")
     public Response get(@PathVariable("id") Integer id) {
-        return Response.ok().setPayload(productService.getProduct(id));
-    }
+        return Response.ok().setContent(productService.getProduct(id));
+    } 
 
     @PostMapping()
     public Response create(@RequestBody ProductRequest productRequest) {
-        return Response.ok().setPayload(productService.addProduct(ProductMapper.toProductDto(productRequest)));
+        return Response.ok().setContent(productService.addProduct(ProductMapper.toProductDto(productRequest)));
     }
     
     @PutMapping("/{id}")
     public Response update(@PathVariable("id") Integer id, @RequestBody ProductRequest productRequest) {
-        return Response.ok().setPayload(productService.updateProduct(id, ProductMapper.toProductDto(productRequest)));
+        return Response.ok().setContent(productService.updateProduct(id, ProductMapper.toProductDto(productRequest)));
     }
 
     @DeleteMapping("/{id}")
     public Response delete(@PathVariable("id") Integer id) {
-        return Response.ok().setPayload(productService.deleteProduct(id));
+        return Response.ok().setContent(productService.deleteProduct(id));
     }
 }
