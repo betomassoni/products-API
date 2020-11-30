@@ -1,7 +1,6 @@
 package br.com.robertomassoni.xyinc.service;
 
 import br.com.robertomassoni.xyinc.dto.model.ProductDto;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

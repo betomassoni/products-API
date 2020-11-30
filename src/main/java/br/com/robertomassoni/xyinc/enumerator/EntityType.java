@@ -3,7 +3,8 @@ package br.com.robertomassoni.xyinc.enumerator;
 
 public enum EntityType {
     PRODUCT("Product"),
-    CATEGORY("Category");
+    CATEGORY("Category"),
+    USER("User");
     
     String value;
 

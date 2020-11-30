@@ -5,6 +5,10 @@
     <class>br.com.robertomassoni.xyinc.model.Products</class>
     <class>br.com.robertomassoni.xyinc.model.Category</class>
     <class>br.com.robertomassoni.xyinc.model.Product</class>
+    <class>br.com.robertomassoni.xyinc.model.User</class>
+    <class>br.com.robertomassoni.xyinc.model.Profile</class>
+    <class>br.com.robertomassoni.xyinc.model.Role</class>
+    <class>br.com.robertomassoni.xyinc.model.User_1</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/xyinc_db?zeroDateTimeBehavior=convertToNull"/>
