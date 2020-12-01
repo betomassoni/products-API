@@ -1,8 +1,5 @@
 package br.com.robertomassoni.xyinc.security;
 
-import br.com.robertomassoni.xyinc.enumerator.EntityType;
-import br.com.robertomassoni.xyinc.enumerator.ExceptionType;
-import br.com.robertomassoni.xyinc.exception.XyincException;
 import br.com.robertomassoni.xyinc.model.User;
 import br.com.robertomassoni.xyinc.service.UserService;
 import java.io.IOException;

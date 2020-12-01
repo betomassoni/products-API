@@ -17,10 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Service
 public class TokenService {
     
-    @Autowired
-    private AuthenticationManager authManager;
-    
-    
     public String generateToken(Authentication authentication) {
         User userLogged = (User) authentication.getPrincipal();
         Date today = DateUtil.today();
@@ -49,10 +45,4 @@ public class TokenService {
         return Integer.parseInt(claims.getSubject());
     }
     
-    public TokenDto getToken(UserRequest userRequest) {        
-        UsernamePasswordAuthenticationToken loginInfo = userRequest.converter();
-        Authentication auth = authManager.authenticate(loginInfo);
-        String token = this.generateToken(auth);
-        return new TokenDto(token, SecurityConstants.TOKEN_PREFIX);
-    }
 }
