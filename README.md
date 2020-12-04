@@ -37,7 +37,7 @@ docker-compose build
 docker-compose up
 ```
 
-## Inicializando no Localmente
+## Inicializando Localmente
 Para inicializar o projeto localmente, deve ser importado o banco de dados disponível na pasta <b>database</a> e em seguida executar o jar do projeto utilizando o servidor Tomcat incubado.
 
 ```
