@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "c76046ac-c69e-4130-9ac8-d5dc1357e2e5",
+		"name": "XyInc Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth: Bearer",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"token\", jsonData.content.token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\":\"robertopmassoni@gmail.com\",\n    \"password\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/auth",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request Methods",
+			"item": [
+				{
+					"name": "GET One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localBasedUrl}}/products/1",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Many",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localBasedUrl}}/products",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Headphone 2\",\n    \"description\": null,\n    \"price\": 83.98,\n    \"category\": \"Eletronics\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/products/1",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Headphone 3\",\n    \"description\": null,\n    \"price\": 83.98,\n    \"category\": \"Eletronics\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/products/1",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localBasedUrl}}/products/7",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"products",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJYeSBJbmMgQVBJIiwic3ViIjoiMSIsImlhdCI6MTYwODczMDk4OSwiZXhwIjoxNjA5NTk0OTg5fQ.XOAJG_l4M9cUzTw5ecTMAPkILoHh9fNa9y4ANaibyrQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "localBasedUrl",
+			"value": "http://localhost:8080/api"
+		}
+	]
+}
